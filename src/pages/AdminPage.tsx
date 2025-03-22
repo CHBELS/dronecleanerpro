@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -108,7 +107,9 @@ const AdminPage = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">Titre principal, textes et éléments de la page d'accueil</p>
-                  <Button size="sm" className="w-full">Éditer la page</Button>
+                  <Button size="sm" className="w-full" onClick={() => navigate('/admin/edit-home')}>
+                    Éditer la page
+                  </Button>
                 </CardContent>
               </Card>
               
@@ -122,7 +123,9 @@ const AdminPage = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">Modifier, ajouter ou supprimer des services</p>
-                  <Button size="sm" className="w-full">Éditer les services</Button>
+                  <Button size="sm" className="w-full" onClick={() => navigate('/admin/edit-services')}>
+                    Éditer les services
+                  </Button>
                 </CardContent>
               </Card>
               
@@ -136,7 +139,9 @@ const AdminPage = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">Présentation, histoire et mission de l'entreprise</p>
-                  <Button size="sm" className="w-full">Éditer la page</Button>
+                  <Button size="sm" className="w-full" onClick={() => navigate('/admin/edit-about')}>
+                    Éditer la page
+                  </Button>
                 </CardContent>
               </Card>
               
@@ -150,7 +155,9 @@ const AdminPage = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">Coordonnées, formulaire et horaires</p>
-                  <Button size="sm" className="w-full">Éditer les contacts</Button>
+                  <Button size="sm" className="w-full" onClick={() => navigate('/admin/edit-contact')}>
+                    Éditer les contacts
+                  </Button>
                 </CardContent>
               </Card>
               
@@ -164,7 +171,9 @@ const AdminPage = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">Régions et villes desservies</p>
-                  <Button size="sm" className="w-full">Éditer les zones</Button>
+                  <Button size="sm" className="w-full" onClick={() => navigate('/admin/edit-zones')}>
+                    Éditer les zones
+                  </Button>
                 </CardContent>
               </Card>
             </div>
