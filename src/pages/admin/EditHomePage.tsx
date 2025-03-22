@@ -1,13 +1,27 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft } from 'lucide-react';
 
 const EditHomePage = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="container mx-auto p-6">
+      <div className="mb-4">
+        <Button 
+          variant="outline" 
+          onClick={() => navigate('/admin')}
+          className="flex items-center"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Retour au tableau de bord
+        </Button>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle>Éditer la page d'accueil</CardTitle>
