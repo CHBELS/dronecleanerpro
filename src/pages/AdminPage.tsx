@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import { useSiteContent } from '@/context/SiteContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -32,7 +34,10 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const AdminPage = () => {
   const { isAuthenticated, logout } = useAuth();
+  const { siteContent, updateSiteSettings } = useSiteContent();
   const navigate = useNavigate();
+  
+  const [settings, setSettings] = useState(siteContent.settings);
   
   useEffect(() => {
     document.title = "Administration - DroneCleanerPro";
@@ -42,6 +47,19 @@ const AdminPage = () => {
       navigate('/login');
     }
   }, [isAuthenticated, navigate]);
+
+  useEffect(() => {
+    setSettings(siteContent.settings);
+  }, [siteContent.settings]);
+
+  const handleSettingsChange = (field: keyof typeof settings, value: string) => {
+    setSettings(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSaveSettings = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateSiteSettings(settings);
+  };
 
   const handleLogout = () => {
     logout();
@@ -244,31 +262,49 @@ const AdminPage = () => {
                 <CardDescription>Configurez les informations de base du site.</CardDescription>
               </CardHeader>
               <CardContent>
-                <form className="space-y-4">
+                <form onSubmit={handleSaveSettings} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Titre du site</label>
-                      <Input defaultValue="DroneCleanerPro" />
+                      <Input 
+                        value={settings.siteName} 
+                        onChange={(e) => handleSettingsChange('siteName', e.target.value)} 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Slogan</label>
-                      <Input defaultValue="Nettoyage professionnel par drone" />
+                      <Input 
+                        value={settings.slogan} 
+                        onChange={(e) => handleSettingsChange('slogan', e.target.value)} 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Email de contact</label>
-                      <Input defaultValue="contact@dronecleanerpro.com" />
+                      <Input 
+                        value={settings.email} 
+                        onChange={(e) => handleSettingsChange('email', e.target.value)} 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Téléphone</label>
-                      <Input defaultValue="+33 1 23 45 67 89" />
+                      <Input 
+                        value={settings.phone} 
+                        onChange={(e) => handleSettingsChange('phone', e.target.value)} 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Adresse</label>
-                      <Input defaultValue="Annecy, Haute-Savoie" />
+                      <Input 
+                        value={settings.address} 
+                        onChange={(e) => handleSettingsChange('address', e.target.value)} 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Zone d'intervention principale</label>
-                      <Input defaultValue="Haute-Savoie" />
+                      <Input 
+                        value={settings.mainArea} 
+                        onChange={(e) => handleSettingsChange('mainArea', e.target.value)} 
+                      />
                     </div>
                   </div>
                   
@@ -276,7 +312,8 @@ const AdminPage = () => {
                     <label className="text-sm font-medium">Description du site</label>
                     <Textarea 
                       rows={4}
-                      defaultValue="DroneCleanerPro propose des services de nettoyage professionnel par drone pour les toitures, façades et panneaux solaires en Haute-Savoie."
+                      value={settings.description} 
+                      onChange={(e) => handleSettingsChange('description', e.target.value)} 
                     />
                   </div>
                   
@@ -284,11 +321,12 @@ const AdminPage = () => {
                     <label className="text-sm font-medium">Horaires d'ouverture</label>
                     <Textarea 
                       rows={3}
-                      defaultValue="Lundi - Vendredi: 8h - 18h&#10;Samedi: 9h - 14h&#10;Dimanche: Fermé"
+                      value={settings.hours} 
+                      onChange={(e) => handleSettingsChange('hours', e.target.value)} 
                     />
                   </div>
                   
-                  <Button className="mt-4">Enregistrer les modifications</Button>
+                  <Button type="submit" className="mt-4">Enregistrer les modifications</Button>
                 </form>
               </CardContent>
             </Card>

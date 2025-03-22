@@ -1,26 +1,24 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from 'lucide-react';
 import { useSiteContent } from "@/context/SiteContext";
-import { toast } from "sonner";
 
-const EditHomePage = () => {
+const EditAboutPage = () => {
   const navigate = useNavigate();
-  const { siteContent, updateHomeContent } = useSiteContent();
+  const { siteContent, updateAboutContent } = useSiteContent();
   
-  const [title, setTitle] = useState(siteContent.home.title);
-  const [subtitle, setSubtitle] = useState(siteContent.home.subtitle);
-  const [content, setContent] = useState(siteContent.home.content);
+  const [title, setTitle] = useState(siteContent.about.title);
+  const [content, setContent] = useState(siteContent.about.content);
+  const [mission, setMission] = useState(siteContent.about.mission);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateHomeContent({ title, subtitle, content });
-    toast.success("Page d'accueil mise à jour avec succès");
+    updateAboutContent({ title, content, mission });
   };
   
   return (
@@ -37,24 +35,16 @@ const EditHomePage = () => {
       </div>
       <Card>
         <CardHeader>
-          <CardTitle>Éditer la page d'accueil</CardTitle>
+          <CardTitle>Éditer la page À propos</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Titre principal</label>
+              <label className="text-sm font-medium">Titre de la page</label>
               <Input 
                 value={title} 
                 onChange={(e) => setTitle(e.target.value)} 
-                placeholder="Titre de la page d'accueil" 
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Sous-titre</label>
-              <Input 
-                value={subtitle} 
-                onChange={(e) => setSubtitle(e.target.value)} 
-                placeholder="Sous-titre de la page d'accueil" 
+                placeholder="À propos de DroneCleanerPro" 
               />
             </div>
             <div className="space-y-2">
@@ -62,8 +52,17 @@ const EditHomePage = () => {
               <Textarea 
                 value={content} 
                 onChange={(e) => setContent(e.target.value)} 
-                placeholder="Contenu de la page d'accueil" 
+                placeholder="Histoire de l'entreprise, expertise..."
                 rows={6} 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Notre mission</label>
+              <Textarea 
+                value={mission} 
+                onChange={(e) => setMission(e.target.value)} 
+                placeholder="Mission et vision de l'entreprise"
+                rows={4} 
               />
             </div>
             <Button type="submit" className="w-full">Sauvegarder les modifications</Button>
@@ -74,4 +73,4 @@ const EditHomePage = () => {
   );
 };
 
-export default EditHomePage;
+export default EditAboutPage;
