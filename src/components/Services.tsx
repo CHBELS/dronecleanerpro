@@ -1,5 +1,5 @@
 
-import { Home, Building, Sun, CheckCircle, Window, Factory, Snowflake } from 'lucide-react';
+import { Home, Building, Sun, CheckCircle, Window as WindowIcon, Factory, Snowflake } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 
 const Services = () => {
@@ -20,7 +20,7 @@ const Services = () => {
       description: "Optimisation du rendement de vos installations photovoltaïques grâce à un nettoyage régulier et précis.",
     },
     {
-      icon: <Window className="h-8 w-8 text-drone-600" />,
+      icon: <WindowIcon className="h-8 w-8 text-drone-600" />,
       title: "Lavage de vitres en hauteur",
       description: "Solution idéale pour les vitres difficiles d'accès, pour une transparence parfaite sans prise de risque.",
     },
