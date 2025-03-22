@@ -23,15 +23,24 @@ const EditAboutPage = () => {
     setTitle(siteContent.about.title);
     setContent(siteContent.about.content);
     setMission(siteContent.about.mission);
+    console.log("EditAboutPage rendered with data:", {title, content, mission});
   }, [siteContent.about]);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateAboutContent({ title, content, mission });
+    
+    const updatedContent = { title, content, mission };
+    console.log("Updating about content with:", updatedContent);
+    
+    updateAboutContent(updatedContent);
+    
     toast({
       title: "Modifications enregistrées",
       description: "Le contenu de la page À propos a été mis à jour."
     });
+    
+    // Navigate to the about page to see changes
+    navigate('/a-propos');
   };
   
   return (
@@ -78,7 +87,12 @@ const EditAboutPage = () => {
                 rows={4} 
               />
             </div>
-            <Button type="submit" className="w-full">Sauvegarder les modifications</Button>
+            <div className="flex space-x-4">
+              <Button type="submit" className="flex-1">Sauvegarder les modifications</Button>
+              <Button type="button" variant="outline" onClick={() => navigate('/a-propos')} className="flex-1">
+                Voir la page
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

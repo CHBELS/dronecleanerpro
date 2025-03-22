@@ -1,15 +1,18 @@
 
 import { Users, Lightbulb, Landmark } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
+import { useSiteContent } from '@/context/SiteContext';
 
 const About = () => {
+  const { siteContent } = useSiteContent();
+  
   return (
     <section id="about" className="py-24 bg-gradient-to-b from-white to-drone-50">
       <div className="section-container">
         <AnimatedSection>
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              À <span className="text-gradient">Propos</span> de Nous
+              {siteContent.about.title}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Découvrez l'histoire de notre entreprise et notre passion pour l'innovation 
@@ -36,15 +39,11 @@ const About = () => {
               </h3>
               
               <p className="text-gray-700">
-                Fondée en 2020 en Haute-Savoie par une équipe passionnée d'aéronautique et d'innovation, 
-                DroneCleanerPro est née de la conviction que les nouvelles technologies pouvaient révolutionner 
-                le secteur du nettoyage industriel et résidentiel.
+                {siteContent.about.content}
               </p>
               
-              <p className="text-gray-700">
-                Face aux défis posés par le nettoyage des bâtiments en hauteur - coûts élevés, risques 
-                pour les travailleurs, impact environnemental - nous avons développé une solution unique 
-                combinant la technologie des drones et le savoir-faire Karcher.
+              <p className="text-gray-700 mt-4">
+                {siteContent.about.mission}
               </p>
               
               <div className="space-y-6 mt-8">

@@ -13,6 +13,10 @@ import { useSiteContent } from '@/context/SiteContext';
 
 const HomePage = () => {
   const { siteContent } = useSiteContent();
+  
+  React.useEffect(() => {
+    console.log("HomePage rendered with content:", siteContent);
+  }, [siteContent]);
 
   return (
     <div className="min-h-screen flex flex-col">

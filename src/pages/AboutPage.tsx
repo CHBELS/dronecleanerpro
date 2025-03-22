@@ -1,13 +1,12 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import About from '@/components/About';
 import Footer from '@/components/Footer';
+import { useSiteContent } from '@/context/SiteContext';
 
 const AboutPage = () => {
-  useEffect(() => {
-    document.title = "À Propos - DroneCleanerPro";
-  }, []);
+  const { siteContent } = useSiteContent();
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">

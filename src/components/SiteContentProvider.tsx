@@ -36,7 +36,14 @@ const SiteContentProvider: React.FC<SiteContentProviderProps> = ({ children }) =
       document.title = siteContent.home.title;
     } else if (path === '/a-propos') {
       document.title = siteContent.about.title;
+    } else if (path.includes('/admin/edit-about')) {
+      document.title = "Éditer - " + siteContent.about.title;
     }
+    
+    console.log("Current path:", path);
+    console.log("Current title:", document.title);
+    console.log("About content:", siteContent.about);
+    
     // Add other page-specific title updates as needed
   }, [location.pathname, siteContent]);
   
