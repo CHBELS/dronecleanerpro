@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 
@@ -24,13 +25,13 @@ const Navbar = () => {
   }, [scrolled]);
 
   const navLinks = [
-    { name: 'Accueil', href: '#home' },
-    { name: 'Technologie', href: '#technology' },
-    { name: 'Services', href: '#services' },
-    { name: 'Zone', href: '#area' },
-    { name: 'Pourquoi nous', href: '#why' },
-    { name: 'À propos', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Accueil', href: '/' },
+    { name: 'Technologie', href: '/technologie' },
+    { name: 'Services', href: '/services' },
+    { name: 'Zone', href: '/zone-intervention' },
+    { name: 'Pourquoi nous', href: '/pourquoi-nous' },
+    { name: 'À propos', href: '/a-propos' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -43,20 +44,20 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8 flex justify-between items-center">
-        <a href="#home" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <span className="font-bold text-xl text-drone-700">DroneCleanerPro</span>
-        </a>
+        </Link>
         
         {/* Desktop navigation */}
         <div className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="text-gray-700 hover:text-drone-600 font-medium transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
         
@@ -82,14 +83,14 @@ const Navbar = () => {
       >
         <div className="flex flex-col py-4 px-6">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="py-3 text-gray-700 hover:text-drone-600 font-medium transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
       </div>
