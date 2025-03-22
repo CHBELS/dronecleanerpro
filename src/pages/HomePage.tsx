@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
@@ -13,10 +13,6 @@ import { useSiteContent } from '@/context/SiteContext';
 
 const HomePage = () => {
   const { siteContent } = useSiteContent();
-
-  useEffect(() => {
-    document.title = siteContent.home.title;
-  }, [siteContent.home.title]);
 
   return (
     <div className="min-h-screen flex flex-col">

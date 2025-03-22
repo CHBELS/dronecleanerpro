@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,18 +7,31 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from 'lucide-react';
 import { useSiteContent } from "@/context/SiteContext";
+import { useToast } from "@/hooks/use-toast";
 
 const EditAboutPage = () => {
   const navigate = useNavigate();
   const { siteContent, updateAboutContent } = useSiteContent();
+  const { toast } = useToast();
   
   const [title, setTitle] = useState(siteContent.about.title);
   const [content, setContent] = useState(siteContent.about.content);
   const [mission, setMission] = useState(siteContent.about.mission);
   
+  // Ensure state is updated when context changes
+  useEffect(() => {
+    setTitle(siteContent.about.title);
+    setContent(siteContent.about.content);
+    setMission(siteContent.about.mission);
+  }, [siteContent.about]);
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     updateAboutContent({ title, content, mission });
+    toast({
+      title: "Modifications enregistrées",
+      description: "Le contenu de la page À propos a été mis à jour."
+    });
   };
   
   return (

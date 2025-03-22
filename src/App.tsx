@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { SiteProvider } from "./context/SiteContext";
+import SiteContentProvider from "./components/SiteContentProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import HomePage from "./pages/HomePage";
@@ -31,50 +32,52 @@ const App = () => (
     <TooltipProvider>
       <AuthProvider>
         <SiteProvider>
-          <Toaster />
-          <Sonner />
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/technologie" element={<TechnologyPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/zone-intervention" element={<ServiceAreaPage />} />
-              <Route path="/pourquoi-nous" element={<WhyChooseUsPage />} />
-              <Route path="/a-propos" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/admin" element={
-                <ProtectedRoute>
-                  <AdminPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/edit-home" element={
-                <ProtectedRoute>
-                  <EditHomePage />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/edit-services" element={
-                <ProtectedRoute>
-                  <EditServicesPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/edit-contact" element={
-                <ProtectedRoute>
-                  <EditContactPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/edit-about" element={
-                <ProtectedRoute>
-                  <EditAboutPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/edit-zones" element={
-                <ProtectedRoute>
-                  <EditZonesPage />
-                </ProtectedRoute>
-              } />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <SiteContentProvider>
+              <Toaster />
+              <Sonner />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/technologie" element={<TechnologyPage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/zone-intervention" element={<ServiceAreaPage />} />
+                <Route path="/pourquoi-nous" element={<WhyChooseUsPage />} />
+                <Route path="/a-propos" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/admin" element={
+                  <ProtectedRoute>
+                    <AdminPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit-home" element={
+                  <ProtectedRoute>
+                    <EditHomePage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit-services" element={
+                  <ProtectedRoute>
+                    <EditServicesPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit-contact" element={
+                  <ProtectedRoute>
+                    <EditContactPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit-about" element={
+                  <ProtectedRoute>
+                    <EditAboutPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit-zones" element={
+                  <ProtectedRoute>
+                    <EditZonesPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </SiteContentProvider>
           </BrowserRouter>
         </SiteProvider>
       </AuthProvider>
